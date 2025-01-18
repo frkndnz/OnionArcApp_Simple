@@ -19,24 +19,24 @@ namespace OnionArcApp.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>().HasData(
                 new Product()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     Name = "Pen",
                     Value = 10,
                     Quantity = 100
                 },
                 new Product()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     Name = "Book",
                     Value = 30,
                     Quantity = 500
                 }
                 );
 
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

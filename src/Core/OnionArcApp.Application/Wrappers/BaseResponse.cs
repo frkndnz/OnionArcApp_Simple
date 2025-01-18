@@ -11,5 +11,7 @@ namespace OnionArcApp.Application.Wrappers
         public Guid Id { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
+
+        
     }
 }

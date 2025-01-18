@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnionArcApp.Application.Dto
+namespace OnionArcApp.Application.Dto.Product
 {
     public class ProductViewDto
     {
