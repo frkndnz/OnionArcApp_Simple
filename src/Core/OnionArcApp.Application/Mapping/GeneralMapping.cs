@@ -11,15 +11,15 @@ using OnionArcApp.Domain.Entities;
 
 namespace OnionArcApp.Application.Mapping
 {
-    public class GeneralMapping:Profile
+    public class GeneralMapping : Profile
     {
         public GeneralMapping()
         {
-            CreateMap<Product,ProductViewDto>().ReverseMap();
+            CreateMap<Product, ProductViewDto>().ReverseMap();
             CreateMap<CreateProductCommand, Product>();
 
-
-            CreateMap<CreateUserCommand, User>();
+            CreateMap<CreateUserCommand, User>()
+                .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
         }
     }
 }

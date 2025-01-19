@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnionArcApp.Application.Interfaces.Repository;
 using OnionArcApp.Persistence.Context;
@@ -13,11 +14,12 @@ namespace OnionArcApp.Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddPersistenceServices(this IServiceCollection services)
+        public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("memoryDb"));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
 
-            services.AddTransient<IProductRepository,ProductRepository>();
+            services.AddScoped<IProductRepository,ProductRepository>();
+            services.AddScoped<IUserRepository,UserRepository>();
         }
     }
 }

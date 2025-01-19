@@ -1,5 +1,5 @@
 ﻿using MediatR;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct;
@@ -12,7 +12,7 @@ namespace OnionArcApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IMediator mediator;

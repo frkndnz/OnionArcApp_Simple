@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using OnionArcApp.Application.Interfaces.Repository;
 using OnionArcApp.Application.Interfaces.Token;
+using OnionArcApp.Application.Interfaces.UserPassword;
 using OnionArcApp.Application.Wrappers;
 using OnionArcApp.Domain.Entities;
 
@@ -16,10 +17,12 @@ namespace OnionArcApp.Application.Features.UserOperations.Commands.CreateUser
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public CreateUserCommandHandler(ITokenHandler tokenHandler, IUserRepository userRepository, IMapper mapper)
+        private readonly IPasswordService _passwordService;
+        public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper, IPasswordService passwordService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _passwordService = passwordService;
         }
         public async Task<ServiceResponse<Guid>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
@@ -27,7 +30,11 @@ namespace OnionArcApp.Application.Features.UserOperations.Commands.CreateUser
             if (existUser != null)
                 return ServiceResponse<Guid>.FailureResponse("email already exists!");
 
-            //validate edilecek
+
+            var hashPassword=_passwordService.HashPassword(request.Password);
+            
+            request.Password = hashPassword;
+            
 
 
 
