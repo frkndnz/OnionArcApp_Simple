@@ -1,16 +1,18 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using OnionArcApp.Application.Dto.Product;
-using OnionArcApp.Application.Features.Commands.CreateProduct;
-using OnionArcApp.Application.Features.Quieries.GetAllProducts;
-using OnionArcApp.Application.Features.Quieries.GetProductById;
-using OnionArcApp.Application.Interfaces.Repository;
+
+using OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct;
+using OnionArcApp.Application.Features.ProductOperations.Quieries.GetAllProducts;
+using OnionArcApp.Application.Features.ProductOperations.Quieries.GetProductById;
+
+
 
 namespace OnionArcApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class ProductController : ControllerBase
     {
         private readonly IMediator mediator;

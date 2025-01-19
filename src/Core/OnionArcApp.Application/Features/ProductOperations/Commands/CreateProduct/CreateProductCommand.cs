@@ -11,7 +11,7 @@ using OnionArcApp.Application.Interfaces.Repository;
 using OnionArcApp.Application.Wrappers;
 using OnionArcApp.Domain.Entities;
 
-namespace OnionArcApp.Application.Features.Commands.CreateProduct
+namespace OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct
 {
     public class CreateProductCommand : IRequest<ServiceResponse<Guid>>
     {
@@ -26,7 +26,7 @@ namespace OnionArcApp.Application.Features.Commands.CreateProduct
             Quantity = quantity;
         }
 
-        
+
 
         public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ServiceResponse<Guid>>
         {
@@ -42,17 +42,17 @@ namespace OnionArcApp.Application.Features.Commands.CreateProduct
 
             public async Task<ServiceResponse<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
             {
-                var validatorResult=validator.Validate(request);
-                if(validatorResult.IsValid == false)
+                var validatorResult = validator.Validate(request);
+                if (validatorResult.IsValid == false)
                 {
                     return ServiceResponse<Guid>.ValidationFailedResponse(validatorResult.Errors);
                 }
 
-                var product=mapper.Map<Product>(request);
+                var product = mapper.Map<Product>(request);
                 await productRepository.AddAsync(product);
 
                 return ServiceResponse<Guid>.SuccessResponse(product.Id);
-                
+
             }
         }
     }

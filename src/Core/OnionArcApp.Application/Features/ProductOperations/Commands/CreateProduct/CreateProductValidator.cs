@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using FluentValidation;
 using OnionArcApp.Application.Dto.Product;
 
-namespace OnionArcApp.Application.Features.Commands.CreateProduct
+namespace OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct
 {
-    public class CreateProductValidator:AbstractValidator<CreateProductCommand>
+    public class CreateProductValidator : AbstractValidator<CreateProductCommand>
     {
         public CreateProductValidator()
         {

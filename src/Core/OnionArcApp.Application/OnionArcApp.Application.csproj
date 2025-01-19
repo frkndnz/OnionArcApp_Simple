@@ -17,4 +17,8 @@
     <ProjectReference Include="..\OnionArcApp.Domain\OnionArcApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\UserOperations\Queries\" />
+  </ItemGroup>
+
 </Project>

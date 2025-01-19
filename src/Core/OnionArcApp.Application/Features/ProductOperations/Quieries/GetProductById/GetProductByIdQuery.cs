@@ -9,7 +9,7 @@ using OnionArcApp.Application.Dto.Product;
 using OnionArcApp.Application.Interfaces.Repository;
 using OnionArcApp.Application.Wrappers;
 
-namespace OnionArcApp.Application.Features.Quieries.GetProductById
+namespace OnionArcApp.Application.Features.ProductOperations.Quieries.GetProductById
 {
     public class GetProductByIdQuery : IRequest<ServiceResponse<ProductViewDto>>
     {
@@ -26,7 +26,7 @@ namespace OnionArcApp.Application.Features.Quieries.GetProductById
             private readonly IProductRepository productRepository;
             private readonly IMapper mapper;
 
-            public GetProductByIdHandler(IProductRepository productRepository,IMapper mapper)
+            public GetProductByIdHandler(IProductRepository productRepository, IMapper mapper)
             {
                 this.productRepository = productRepository;
                 this.mapper = mapper;
@@ -34,10 +34,10 @@ namespace OnionArcApp.Application.Features.Quieries.GetProductById
             public async Task<ServiceResponse<ProductViewDto>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
             {
                 var product = await productRepository.GetByIdAsync(request.id);
-                if(product == null)
+                if (product == null)
                     return ServiceResponse<ProductViewDto>.FailureResponse("Product not found!");
 
-                var productDto=mapper.Map<ProductViewDto>(product);
+                var productDto = mapper.Map<ProductViewDto>(product);
                 return ServiceResponse<ProductViewDto>.SuccessResponse(productDto);
             }
         }

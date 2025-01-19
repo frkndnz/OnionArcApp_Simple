@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using OnionArcApp.Application.Dto.Product;
-using OnionArcApp.Application.Features.Commands.CreateProduct;
+using OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct;
+using OnionArcApp.Application.Features.UserOperations.Commands.CreateUser;
 using OnionArcApp.Domain.Entities;
 
 namespace OnionArcApp.Application.Mapping
@@ -16,6 +17,9 @@ namespace OnionArcApp.Application.Mapping
         {
             CreateMap<Product,ProductViewDto>().ReverseMap();
             CreateMap<CreateProductCommand, Product>();
+
+
+            CreateMap<CreateUserCommand, User>();
         }
     }
 }

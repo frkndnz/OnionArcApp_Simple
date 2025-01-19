@@ -5,9 +5,9 @@ using OnionArcApp.Application.Dto.Product;
 using OnionArcApp.Application.Interfaces.Repository;
 using OnionArcApp.Application.Wrappers;
 
-namespace OnionArcApp.Application.Features.Quieries.GetAllProducts
+namespace OnionArcApp.Application.Features.ProductOperations.Quieries.GetAllProducts
 {
-    public class GetAllProductsQuery:IRequest<ServiceResponse<List<ProductViewDto>>>
+    public class GetAllProductsQuery : IRequest<ServiceResponse<List<ProductViewDto>>>
     {
 
         public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, ServiceResponse<List<ProductViewDto>>>
@@ -22,8 +22,8 @@ namespace OnionArcApp.Application.Features.Quieries.GetAllProducts
 
             public async Task<ServiceResponse<List<ProductViewDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
             {
-                var products =await productRepository.GetAllAsync();
-                if(!products.Any())
+                var products = await productRepository.GetAllAsync();
+                if (!products.Any())
                     return ServiceResponse<List<ProductViewDto>>.FailureResponse("Not found products!");
 
                 var dto = mapper.Map<List<ProductViewDto>>(products);

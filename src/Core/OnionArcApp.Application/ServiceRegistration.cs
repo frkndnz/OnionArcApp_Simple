@@ -2,7 +2,7 @@
 using System.Reflection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using OnionArcApp.Application.Features.Commands.CreateProduct;
+using OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct;
 
 namespace OnionArcApp.Application
 {
