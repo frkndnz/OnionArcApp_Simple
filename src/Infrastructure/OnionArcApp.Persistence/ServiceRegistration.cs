@@ -19,6 +19,7 @@ namespace OnionArcApp.Persistence
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
 
             services.AddScoped<IProductRepository,ProductRepository>();
+            services.AddScoped<IRoleRepository,RoleRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
         }
     }

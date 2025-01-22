@@ -12,5 +12,7 @@ namespace OnionArcApp.Domain.Entities
         public string Name { get; set; }
         public string PasswordHash { get; set; }
         public string Email { get; set; }
+        public Role? Role { get; set; }
+        
     }
 }

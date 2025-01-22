@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Security.Claims;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnionArcApp.Application.Features.UserOperations.Commands.CreateUser;
 using OnionArcApp.Application.Features.UserOperations.Commands.LoginUser;
@@ -34,6 +36,14 @@ namespace OnionArcApp.WebApi.Controllers
                 return BadRequest(result);
 
             return Ok(result);
+        }
+
+        [Authorize(Roles ="Admin,User")]
+        [HttpGet("info")]
+        public IActionResult GetUserInfo()
+        { 
+            
+           return Ok(  User.FindFirst(ClaimTypes.Name).Value);
         }
     }
 }

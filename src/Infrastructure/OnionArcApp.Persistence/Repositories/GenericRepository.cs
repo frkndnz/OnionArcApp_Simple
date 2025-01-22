@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -28,12 +29,21 @@ namespace OnionArcApp.Persistence.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-           return await dbContext.Set<T>().ToListAsync();
+            return await dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(Guid Id)
+        public async Task<T?> GetByIdAsync(Guid Id)
         {
             return await dbContext.Set<T>().FindAsync(Id);
+        }
+
+        public async Task<T?> GetByIdIncludesAsync(Guid Id, Expression<Func<T, object>> include)
+        {
+            IQueryable<T> query = dbContext.Set<T>();
+
+            query = query.Include(include);
+
+            return await query.FirstOrDefaultAsync(u => u.Id == Id);
         }
     }
 }

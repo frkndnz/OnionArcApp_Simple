@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnionArcApp.Persistence.Context;
 
@@ -11,9 +12,11 @@ using OnionArcApp.Persistence.Context;
 namespace OnionArcApp.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250120120926_mig_2")]
+    partial class mig_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,20 +65,6 @@ namespace OnionArcApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3f2504e0-4f89-11d3-9a0c-0305e82c3301"),
-                            CreateDate = new DateTime(2025, 1, 20, 15, 23, 10, 316, DateTimeKind.Local).AddTicks(6529),
-                            RoleName = "Admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("8f2504e0-4f89-11d3-9a0c-0305e82c3302"),
-                            CreateDate = new DateTime(2025, 1, 20, 15, 23, 10, 316, DateTimeKind.Local).AddTicks(6550),
-                            RoleName = "User"
-                        });
                 });
 
             modelBuilder.Entity("OnionArcApp.Domain.Entities.User", b =>

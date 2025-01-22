@@ -16,13 +16,15 @@ namespace OnionArcApp.Application.Features.UserOperations.Commands.CreateUser
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ServiceResponse<Guid>>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly IMapper _mapper;
         private readonly IPasswordService _passwordService;
-        public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper, IPasswordService passwordService)
+        public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper, IPasswordService passwordService, IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _passwordService = passwordService;
+            _roleRepository = roleRepository;
         }
         public async Task<ServiceResponse<Guid>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
@@ -33,14 +35,17 @@ namespace OnionArcApp.Application.Features.UserOperations.Commands.CreateUser
 
             var hashPassword=_passwordService.HashPassword(request.Password);
             
-            request.Password = hashPassword;
-            
 
+            var defaultRole = await _roleRepository.GetByName("User");
+            if (defaultRole == null)
+                throw new Exception("defaultRole is not found");
 
+            var user=_mapper.Map<User>(request);
+            user.PasswordHash = hashPassword;
+            user.Role = defaultRole;
+            var addedUser = await _userRepository.AddAsync(user);
 
-            var user = await _userRepository.AddAsync(_mapper.Map<User>(request));
-
-            return ServiceResponse<Guid>.SuccessResponse(user.Id);
+            return ServiceResponse<Guid>.SuccessResponse(addedUser.Id);
         }
     }
 }

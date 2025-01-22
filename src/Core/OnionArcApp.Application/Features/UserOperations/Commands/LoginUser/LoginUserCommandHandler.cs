@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using OnionArcApp.Application.Dto.Token;
+using OnionArcApp.Application.Dto.User;
 using OnionArcApp.Application.Interfaces.Repository;
 using OnionArcApp.Application.Interfaces.Token;
 using OnionArcApp.Application.Interfaces.UserPassword;
@@ -40,7 +41,8 @@ namespace OnionArcApp.Application.Features.UserOperations.Commands.LoginUser
             if(!_passwordService.VerifyPassword(user.PasswordHash, request.Password))
                 return ServiceResponse<TokenDto>.FailureResponse("Password does not match!");
 
-            var token = _tokenHandler.CreateAccessToken();
+            var userIncluded = await _userRepository.GetByIdIncludesAsync(user.Id, u => u.Role!);
+            var token = _tokenHandler.CreateAccessToken(_mapper.Map<UserForTokenDto>(userIncluded));
 
             return ServiceResponse<TokenDto>.SuccessResponse(token);
         }
