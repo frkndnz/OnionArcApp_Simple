@@ -8,6 +8,7 @@ namespace OnionArcApp.Application.Dto.User
 {
     public class UserForTokenDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string RoleName { get; set; }
     }

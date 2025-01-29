@@ -3,6 +3,8 @@ using System.Reflection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct;
+using OnionArcApp.Application.Interfaces.AccountService;
+using OnionArcApp.Application.Services;
 
 namespace OnionArcApp.Application
 {
@@ -15,6 +17,7 @@ namespace OnionArcApp.Application
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assm));
 
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
+            services.AddScoped<IAccountService, AccountService>();
         }
     }
 }

@@ -14,5 +14,6 @@ namespace OnionArcApp.Domain.Entities
         public string Email { get; set; }
         public Role? Role { get; set; }
         
+        public List<Account> Accounts { get; set; }
     }
 }

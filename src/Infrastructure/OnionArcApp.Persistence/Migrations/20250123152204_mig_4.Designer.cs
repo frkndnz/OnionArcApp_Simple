@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnionArcApp.Persistence.Context;
 
@@ -11,9 +12,11 @@ using OnionArcApp.Persistence.Context;
 namespace OnionArcApp.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250123152204_mig_4")]
+    partial class mig_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,13 +99,13 @@ namespace OnionArcApp.Persistence.Migrations
                         new
                         {
                             Id = new Guid("3f2504e0-4f89-11d3-9a0c-0305e82c3301"),
-                            CreateDate = new DateTime(2025, 1, 23, 18, 28, 19, 352, DateTimeKind.Local).AddTicks(4424),
+                            CreateDate = new DateTime(2025, 1, 23, 18, 22, 4, 476, DateTimeKind.Local).AddTicks(3719),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = new Guid("8f2504e0-4f89-11d3-9a0c-0305e82c3302"),
-                            CreateDate = new DateTime(2025, 1, 23, 18, 28, 19, 352, DateTimeKind.Local).AddTicks(4449),
+                            CreateDate = new DateTime(2025, 1, 23, 18, 22, 4, 476, DateTimeKind.Local).AddTicks(3739),
                             RoleName = "User"
                         });
                 });
@@ -129,7 +132,7 @@ namespace OnionArcApp.Persistence.Migrations
                     b.Property<Guid?>("TargetAccountId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("TransactionDate")
+                    b.Property<DateTime>("TransactionData")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("TransactionType")

@@ -32,6 +32,7 @@ namespace OnionArcApp.Infrastructure.Services
 
             var claimsArr = new Claim[]
             {
+                new Claim(ClaimTypes.NameIdentifier,userForTokenDto.Id.ToString()),
                 new Claim(ClaimTypes.Name,userForTokenDto.Name),
                 new Claim(ClaimTypes.Role,userForTokenDto.RoleName)
             };
