@@ -16,6 +16,7 @@ namespace OnionArcApp.Application.Interfaces.Repository
         Task<T> GetByIdAsync(Guid Id);
         Task<T> GetByIdIncludesAsync(Guid Id,Expression<Func<T,object>> include);
 
+        Task<List<T>> GetAllIncludesAsyncs(Expression<Func<T,object>> include);
        
     }
 }

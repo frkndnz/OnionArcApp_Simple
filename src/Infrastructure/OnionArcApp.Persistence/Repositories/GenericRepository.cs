@@ -32,6 +32,12 @@ namespace OnionArcApp.Persistence.Repositories
             return await dbContext.Set<T>().ToListAsync();
         }
 
+        public async Task<List<T>> GetAllIncludesAsyncs(Expression<Func<T, object>> include)
+        {
+            IQueryable<T> query=dbContext.Set<T>().Include(include);
+            return await query.ToListAsync();
+        }
+
         public async Task<T?> GetByIdAsync(Guid Id)
         {
             return await dbContext.Set<T>().FindAsync(Id);

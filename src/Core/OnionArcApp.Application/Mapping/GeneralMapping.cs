@@ -29,6 +29,13 @@ namespace OnionArcApp.Application.Mapping
 
             CreateMap<CreateAccountCommand, Account>();
             CreateMap<CreateAccountDto, Account>();
+            CreateMap<Account, AccountDto>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
+                .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
+                .ForMember(dest => dest.TransactionCount, opt => opt.MapFrom(src => src.Transactions.Count));
+
+
+
         }
     }
 }
