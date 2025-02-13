@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using OnionArcApp.Application.Dto.Account;
 using OnionArcApp.Application.Dto.Product;
+using OnionArcApp.Application.Dto.Transaction;
 using OnionArcApp.Application.Dto.User;
 using OnionArcApp.Application.Features.AccountOperations.Commands.CreateAccount;
 using OnionArcApp.Application.Features.ProductOperations.Commands.CreateProduct;
@@ -34,7 +35,7 @@ namespace OnionArcApp.Application.Mapping
                 .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
                 .ForMember(dest => dest.TransactionCount, opt => opt.MapFrom(src => src.Transactions.Count));
 
-
+            CreateMap<Transaction, TransactionDto>();
 
         }
     }
