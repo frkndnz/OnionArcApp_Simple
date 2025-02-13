@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\TransactionOperations\Queries\" />
     <Folder Include="Features\UserOperations\Queries\" />
   </ItemGroup>
 

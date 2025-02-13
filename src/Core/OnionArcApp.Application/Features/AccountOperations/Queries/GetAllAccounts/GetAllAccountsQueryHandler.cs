@@ -22,7 +22,7 @@ namespace OnionArcApp.Application.Features.AccountOperations.Queries.GetAllAccou
         }
         public async Task<ServiceResponse<List<AccountDto>>> Handle(GetAllAccountsQuery request, CancellationToken cancellationToken)
         {
-            var accounts = await _accountRepository.GetAllIncludesAsyncs(a=>a.User);
+            var accounts = await _accountRepository.GetAllIncludesAsync(a=>a.User,a=>a.Transactions);
             if (accounts == null)
                 return ServiceResponse<List<AccountDto>>.FailureResponse("accounts not found!");
 

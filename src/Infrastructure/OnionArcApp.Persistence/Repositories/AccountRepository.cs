@@ -18,6 +18,12 @@ namespace OnionArcApp.Persistence.Repositories
             _dbSet=dbContext.Set<Account>();
         }
 
+        public async Task<Account> GetByAccountNumber(string accountNumber)
+        {
+            var account =await _dbSet.SingleOrDefaultAsync(x => x.AccountNumber == accountNumber);
+            return account;
+        }
+
         public async Task<Account> GetUserAccountByUserId(Guid userId)
         {
             var account=await _dbSet.FirstOrDefaultAsync(a=>a.User.Id==userId);

@@ -32,9 +32,19 @@ namespace OnionArcApp.Persistence.Repositories
             return await dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<List<T>> GetAllIncludesAsyncs(Expression<Func<T, object>> include)
+        public async Task<List<T>> GetAllIncludeAsync(Expression<Func<T, object>> include)
         {
-            IQueryable<T> query=dbContext.Set<T>().Include(include);
+            IQueryable<T> query = dbContext.Set<T>().Include(include);
+            return await query.ToListAsync();
+        }
+
+        public async Task<List<T>> GetAllIncludesAsync(params Expression<Func<T, object>>[] include)
+        {
+            IQueryable<T> query = dbContext.Set<T>();
+            foreach (var item in include)
+            {
+               query= query.Include(item);
+            }
             return await query.ToListAsync();
         }
 
@@ -43,13 +53,20 @@ namespace OnionArcApp.Persistence.Repositories
             return await dbContext.Set<T>().FindAsync(Id);
         }
 
-        public async Task<T?> GetByIdIncludesAsync(Guid Id, Expression<Func<T, object>> include)
+        public async Task<T?> GetByIdIncludeAsync(Guid Id, Expression<Func<T, object>> include)
         {
             IQueryable<T> query = dbContext.Set<T>();
 
             query = query.Include(include);
 
             return await query.FirstOrDefaultAsync(u => u.Id == Id);
+        }
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            dbContext.Set<T>().Update(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

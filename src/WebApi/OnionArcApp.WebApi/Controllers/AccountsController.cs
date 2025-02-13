@@ -35,7 +35,7 @@ namespace OnionArcApp.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("mine")]
+        [HttpGet("me")]
         [Authorize(Roles ="User")]
         public async Task<IActionResult> GetUserAccounts()
         {

@@ -12,5 +12,7 @@ namespace OnionArcApp.Application.Interfaces.Repository
     {
         Task<List<Account>> GetUserAccountsByUserId(Guid userId);
         Task<Account> GetUserAccountByUserId(Guid userId);
+
+        Task<Account> GetByAccountNumber(string accountNumber);
     }
 }

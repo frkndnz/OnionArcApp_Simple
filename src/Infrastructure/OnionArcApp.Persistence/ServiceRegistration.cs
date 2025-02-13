@@ -22,6 +22,7 @@ namespace OnionArcApp.Persistence
             services.AddScoped<IRoleRepository,RoleRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IAccountRepository,AccountRepository>();
+            services.AddScoped<ITransactionRepository,TransactionRepository>();
         }
     }
 }

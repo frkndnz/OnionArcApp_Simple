@@ -17,7 +17,7 @@ namespace OnionArcApp.Domain.Entities
         public TransactionType TransactionType { get; set; }
         public decimal Amount { get; set; }
         public DateTime TransactionDate {  get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         
         public Account? TargetAccount { get; set; }

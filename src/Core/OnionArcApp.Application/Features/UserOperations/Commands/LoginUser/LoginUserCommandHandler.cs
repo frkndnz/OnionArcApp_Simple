@@ -41,7 +41,7 @@ namespace OnionArcApp.Application.Features.UserOperations.Commands.LoginUser
             if(!_passwordService.VerifyPassword(user.PasswordHash, request.Password))
                 return ServiceResponse<TokenDto>.FailureResponse("Password does not match!");
 
-            var userIncluded = await _userRepository.GetByIdIncludesAsync(user.Id, u => u.Role!);
+            var userIncluded = await _userRepository.GetByIdIncludeAsync(user.Id, u => u.Role!);
             var token = _tokenHandler.CreateAccessToken(_mapper.Map<UserForTokenDto>(userIncluded));
 
             return ServiceResponse<TokenDto>.SuccessResponse(token);
